@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+}
+
+.header {
+    text-align: center;
+    position: fixed;
+    height: 60px;
+    width: 100%;
+}

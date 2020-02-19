@@ -1,0 +1,61 @@
+.container {
+    height: 95%;
+    width: 100%;
+}
+
+.map {
+    width: 45%;
+    height: 65%;
+    float: left;
+    margin-top: 5%;
+}
+
+.tableDiv {
+    width: 45%;
+    height: 65%;
+    float: right;
+    margin-top: 5%;
+    margin-right: 3%;
+}
+
+.table {
+    width: 100%;
+    overflow: scroll;
+}
+
+.tr {
+    height: 43px;
+}
+
+.tr:hover {
+    background-color: rgb(129, 152, 228);
+}
+
+.tr:nth-child(even) {
+    background-color: #d3cece;
+}
+
+.thead {
+    background-color: #d3cece;
+}
+
+.tbody {
+    text-align: center;
+}
+
+@media screen and (max-width: 670px) {
+    .map {
+        width: 90%;
+        height: 70%;
+        float: left;
+        margin-top: 10%;
+        margin-left: 3%;
+    }
+    .tableDiv {
+        width: 90%;
+        height: 70%;
+        float: left;
+        margin-top: 15%;
+        margin-left: 3%;
+    }
+}
