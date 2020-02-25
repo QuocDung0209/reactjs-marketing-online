@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Field } from "react-final-form";
 import TextField from "@material-ui/core/TextField";
-import "../css/Form.css";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -9,11 +8,43 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+
+const useStyles = makeStyles({
+  list: {
+    position: "fixed"
+  },
+  label: {
+    flex: 0.08,
+    fontSize: 18
+  },
+  input: {
+    backgroundColor: "green",
+    padding: "8px 16px",
+    marginTop: 5,
+    marginLeft: 185,
+    fontWeight: "bold",
+    color: "white"
+  },
+  error: {
+    marginLeft: 5,
+    color: "red",
+    fontWeight: "bold"
+  },
+  textField: {
+    marginLeft: 55
+  }
+});
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 const FinalForm = () => {
   const [open, setOpen] = useState(false);
+
+  const classes = useStyles();
 
   const handleNo = () => {
     setOpen(false);
@@ -46,74 +77,53 @@ const FinalForm = () => {
     <Form
       onSubmit={onSubmit}
       validate={validate}
-      render={({
-        handleSubmit,
-        form,
-        submitting,
-        pristine,
-        values,
-        errors
-      }) => (
+      render={({ handleSubmit, submitting, values }) => (
         <div>
           <form onSubmit={handleSubmit}>
-            <table cellSpacing="10px" cellPadding="10px">
-              <thead></thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <label>Name</label>
-                  </td>
-                  <td>
-                    <Field name="name">
-                      {props => (
-                        <div>
-                          <TextField
-                            //   name={props.input.name}
-                            //   value={props.input.value}
-                            {...props.input}
-                            //   onChange={props.input.onChange}
-                            placeholder="Name*"
-                          />
-                          {props.meta.touched && props.meta.error && (
-                            <span>{props.meta.error}</span>
-                          )}
-                          {/* <pre>{JSON.stringify(props, undefined, 2)}</pre> */}
-                        </div>
+            <List className={classes.list}>
+              <ListItem>
+                <ListItemText primary="Name" className={classes.label} />
+                <Field name="name">
+                  {props => (
+                    <div className={classes.textField}>
+                      <TextField {...props.input} placeholder="Name*" />
+                      {props.meta.touched && props.meta.error && (
+                        <span className={classes.error}>
+                          {props.meta.error}
+                        </span>
                       )}
-                    </Field>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <label>Age</label>
-                  </td>
-                  <td>
-                    <Field name="age">
-                      {props => (
-                        <div>
-                          <TextField
-                            name={props.input.name}
-                            value={props.input.value}
-                            onChange={props.input.onChange}
-                            type="number"
-                            placeholder="Age*"
-                          />
-                          {props.meta.touched && props.meta.error && (
-                            <span>{props.meta.error}</span>
-                          )}
-                        </div>
+                    </div>
+                  )}
+                </Field>
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="Age" className={classes.label} />
+                <Field name="age">
+                  {props => (
+                    <div className={classes.textField}>
+                      <TextField
+                        {...props.input}
+                        type="number"
+                        placeholder="Age*"
+                      />
+                      {props.meta.touched && props.meta.error && (
+                        <span className={classes.error}>
+                          {props.meta.error}
+                        </span>
                       )}
-                    </Field>
-                  </td>
-                </tr>
-                <tr>
-                  <td colSpan="2" align="right">
-                    <input type="submit" value="Save" disabled={submitting} />
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot></tfoot>
-            </table>
+                    </div>
+                  )}
+                </Field>
+              </ListItem>
+              <ListItem>
+                <input
+                  type="submit"
+                  value="Save"
+                  disabled={submitting}
+                  className={classes.input}
+                />
+              </ListItem>
+            </List>
           </form>
           <Dialog
             open={open}

@@ -5,13 +5,14 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import YouTubeIcon from "@material-ui/icons/YouTube";
-import "../css/Header.css";
 import { isMobile } from "react-device-detect";
-// import withButton from "../withButton";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
+  },
+  appBar: {
+    zIndex: 1300
   },
   menuButton: {
     marginRight: theme.spacing(2)
@@ -24,38 +25,34 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function ButtonAppBar(props) {
+function Header(props) {
   const classes = useStyles();
-  console.log(`header: ${JSON.stringify(props)}`);
+
   return (
-    <div>
-      <div className="header">
-        <AppBar>
-          <Toolbar className={classes.toolBar}>
-            {!isMobile ? (
-              ""
-            ) : (
-              <IconButton
-                edge="start"
-                className={classes.menuButton}
-                aria-label="menu"
-                // onClick={props.onChange(false)}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
-            <IconButton
-              edge="start"
-              className={classes.youtubeButton}
-              aria-label="youtube"
-            >
-              <YouTubeIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </div>
-    </div>
+    <AppBar className={classes.appBar}>
+      <Toolbar className={classes.toolBar}>
+        {!isMobile ? (
+          ""
+        ) : (
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            aria-label="menu"
+            onClick={() => props.onChange(true)}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+        <IconButton
+          edge="start"
+          className={classes.youtubeButton}
+          aria-label="youtube"
+        >
+          <YouTubeIcon />
+        </IconButton>
+      </Toolbar>
+    </AppBar>
   );
 }
 
-export default ButtonAppBar;
+export default Header;

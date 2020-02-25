@@ -1,83 +1,79 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { NavLink } from "react-router-dom";
-import { menuRoutes } from "../routes.js";
+import { routes } from "../routes.js";
 import { isMobile } from "react-device-detect";
-import Header from "./Header";
 
 const useStyles = makeStyles({
-  drawerPaper: {
-    width: 200,
-    zIndex: -1,
-    paddingTop: 60
-  },
-
   item: {
-    borderBottom: "solid 1px black"
+    borderBottom: "solid 1px black",
+    "&:first-child": {
+      borderTop: "solid 1px black"
+    }
   },
 
   menuLink: {
     textDecoration: "none",
     color: "black"
+  },
+
+  list: {
+    width: 200,
+    paddingTop: 64
+  },
+
+  listMobile: {
+    width: 200,
+    paddingTop: 56
   }
 });
 
-const TemporaryDrawer = props => {
-  const [state, setState] = useState(isMobile ? true : false);
-  const handleChange = value => {
-    setState(value);
-  };
-
+const SideBar = props => {
   const classes = useStyles();
 
-  const renderList = menuRoutes => {
+  const renderList = routes => {
     return (
-      <List>
-        {menuRoutes.map(item => (
-          <NavLink
-            exact={item.exact}
-            to={item.path}
-            className={classes.menuLink}
-            activeStyle={{
-              backgroundColor: "#04d10e",
-              float: "left",
-              width: 200,
-              color: "white"
-            }}
-            key={item.name}
-          >
-            <ListItem className={classes.item} button key={item.name}>
-              <ListItemText primary={item.name} />
-            </ListItem>
-          </NavLink>
-        ))}
+      <List className={isMobile ? classes.listMobile : classes.list}>
+        {routes.map(route => {
+          if (route.type === "menu") {
+            return (
+              <NavLink
+                exact={route.exact}
+                to={route.path}
+                className={classes.menuLink}
+                activeStyle={{
+                  backgroundColor: "#04d10e",
+                  float: "left",
+                  width: 200,
+                  color: "white"
+                }}
+                key={route.name}
+              >
+                <ListItem className={classes.item} button key={route.name}>
+                  <ListItemText primary={route.name} />
+                </ListItem>
+              </NavLink>
+            );
+          }
+          return null;
+        })}
       </List>
     );
   };
 
-  // console.log(`sideBar: ${JSON.stringify(props)}`);
-
   return (
-    <div>
-      <Header onChange={handleChange} test={"test"} />
-      <div className={{ width: 200 }}>
-        <Drawer
-          open={state}
-          onClose={() => handleChange(false)}
-          variant={isMobile ? "temporary" : "permanent"}
-          classes={{
-            paper: classes.drawerPaper
-          }}
-        >
-          {renderList(menuRoutes)}
-        </Drawer>
-      </div>
-    </div>
+    <Drawer
+      open={props.open}
+      onClose={() => props.onChange(false)}
+      variant={isMobile ? "temporary" : "permanent"}
+    >
+      {renderList(routes)}
+    </Drawer>
   );
 };
 
-export default TemporaryDrawer;
+export default SideBar;
