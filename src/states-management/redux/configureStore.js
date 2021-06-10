@@ -17,7 +17,7 @@ const configureStore = () => {
         // list middlewares
     ];
     const enhancers = [applyMiddleware(...middlewares)];
-    const store = createStore(rootReducers, composeEnhancers(enhancers));
+    const store = createStore(rootReducers, composeEnhancers(...enhancers));
     return store;
 };
 
