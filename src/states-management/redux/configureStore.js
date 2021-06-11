@@ -1,4 +1,5 @@
 import { createStore, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import rootReducers from '../reducers';
 
 // This file use to create store - apply middlewares - integrate dev tools
@@ -15,6 +16,7 @@ const composeEnhancers = process.env.NODE_ENV !== 'production' &&
 const configureStore = () => {
     const middlewares = [
         // list middlewares
+        thunk
     ];
     const enhancers = [applyMiddleware(...middlewares)];
     const store = createStore(rootReducers, composeEnhancers(...enhancers));
