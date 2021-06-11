@@ -7,12 +7,13 @@ import { isMobile } from "react-device-detect";
 
 const useStyles = makeStyles({
   paper: {
-    width: "calc(100% - 200px)",
+    // width: "calc(100% - 200px)",
+    width: "100%",
     height: "100%",
     position: "fixed",
-    left: 200,
+    // left: 200,
     paddingTop: 80,
-    overflow: "scroll",
+    overflow: "auto",
   },
 
   paperMobile: {
@@ -42,6 +43,7 @@ const Container = () => {
 
   return (
     <Paper className={isMobile ? classes.paperMobile : classes.paper} square>
+      {/** Components will be render at place which put Routes in with already defined path */}
       <Switch>{result}</Switch>
     </Paper>
   );

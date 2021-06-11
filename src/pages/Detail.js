@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, Prompt, useLocation } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -47,6 +47,7 @@ function Detail(props) {
           Back to home
         </NavLink>
       </CardActions>
+      <Prompt when={true} message={(location) => `Do you want to navigate to ${location.pathname}`} />
     </Paper>
   );
 }

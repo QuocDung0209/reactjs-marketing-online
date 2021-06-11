@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import Header from "./Header";
+import Header from "./Header/Header";
+import HeaderLinks from "./Header/HeaderLink"
 import SideBar from "./SideBar";
 import { isMobile } from "react-device-detect";
 
@@ -12,8 +13,13 @@ const MenuBar = () => {
 
   return (
     <div>
-      <Header onChange={onChange} />
-      <SideBar open={open} onChange={onChange} />
+      <Header
+        brand="Marketing online"
+        rightLinks={<HeaderLinks />}
+        fixed
+        color="dark"
+      />
+      {/* <SideBar open={open} onChange={onChange} /> */}
     </div>
   );
 };

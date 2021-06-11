@@ -4,6 +4,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Map from "../container/GoogleMap";
 import Grid from "@material-ui/core/Grid";
 import InfoTable from "../components/InfoTable";
+import CustomButton from '../components/CustomButtons/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   root: {
@@ -28,12 +30,13 @@ function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
-function Home() {
+function Home({match}) {
   const classes = useStyles();
+  const {name, age} = (match && match.location && match.location.state) ?? {name: '', age: ''};
 
-  let query = useQuery();
-  let name = query.get("name");
-  let age = query.get("age");
+  // let query = useQuery();
+  // let name = query.get("name");
+  // let age = query.get("age");
 
   return (
     <div className={classes.root}>
@@ -43,6 +46,7 @@ function Home() {
           <div>
             <NavLink to="/info">Input infomation</NavLink>
           </div>
+          <CustomButton color="google" outline={true} >Tetsss</CustomButton>
         </Grid>
         <Grid item lg={5} xs={11} className={classes.gridItem}>
           <Map />

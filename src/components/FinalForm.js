@@ -155,7 +155,7 @@ const FinalForm = () => {
                 <Link
                   to={{
                     pathname: "/",
-                    search: `?name=${values.name}&age=${values.age}`
+                    state: {name: values.name, age: values.age}
                   }}
                   style={{ textDecoration: "none", color: "blue" }}
                 >

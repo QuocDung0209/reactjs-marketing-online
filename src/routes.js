@@ -1,8 +1,9 @@
-import React from "react";
+import React from "react"; // Must import React if you use JSX
 import NotFound from "./pages/NotFound";
 import Home from "./pages/Home";
 import Info from "./pages/Info";
 import Detail from "./pages/Detail";
+import Login from './pages/Login';
 
 const routes = [
   {
@@ -10,13 +11,13 @@ const routes = [
     path: "/",
     exact: true,
     type: 'menu',
-    main: () => <Home />
+    main: (match) => <Home match={match} /> // match is used to get params on URL
   },
   {
     name: "Home",
     path: "?",
     exact: false,
-    main: () => <Home />
+    main: ({ match, location }) => <Home match={match} location={location} /> // location is used to get information of previous page when use Redirect of react-router-dom
   },
   {
     name: "Info",
@@ -32,8 +33,13 @@ const routes = [
     main: () => <Detail />
   },
   {
+    name: 'Sign In',
+    path: '/login',
+    exact: false,
+    main: () => <Login />
+  },
+  {
     name: "Notfound",
-    path: "",
     exact: false,
     main: () => <NotFound />
   }
