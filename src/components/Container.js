@@ -7,12 +7,9 @@ import { isMobile } from "react-device-detect";
 
 const useStyles = makeStyles({
   paper: {
-    // width: "calc(100% - 200px)",
     width: "100%",
     height: "100%",
     position: "fixed",
-    // left: 200,
-    paddingTop: 80,
     overflow: "auto",
   },
 
@@ -20,7 +17,6 @@ const useStyles = makeStyles({
     width: "100%",
     height: "100%",
     position: "fixed",
-    paddingTop: 72,
     overflow: "scroll",
   }
 });

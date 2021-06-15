@@ -9,7 +9,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingTop: '72px'
   },
 
   welcome: {
@@ -25,10 +26,6 @@ const useStyles = makeStyles({
     margin: "auto"
   }
 });
-
-function useQuery() {
-  return new URLSearchParams(useLocation().search);
-}
 
 function Home({match}) {
   const classes = useStyles();

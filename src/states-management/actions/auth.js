@@ -31,15 +31,22 @@ export const loginFailed = error => {
  * Step 3: loginSucsess(data response)
  */
 
-export const loginRequest = () => {
+export const loginRequest = (payload) => {
     return dispatch => {
         dispatch(login());
-        authApiService.login()
+        authApiService.login(payload)
             .then(response => {
                 dispatch(loginSuccess(response && response.data));
             })
             .catch(error => {
                 dispatch(loginFailed(error));
+
             });
     };
 };
+
+export const logout = () => ({
+    type: authActionContants.LOGOUT
+});
+
+export const logoutRequest = () => dispatch => dispatch(logout());

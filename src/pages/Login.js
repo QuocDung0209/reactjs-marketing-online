@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Form, Field, FormSpy } from 'react-final-form';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as authActions from '../states-management/actions/login';
+import { useHistory } from 'react-router-dom';
+import * as authActions from '../states-management/actions/auth';
 
 // @material-ui/core components
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -23,16 +24,15 @@ import CustomButton from '../components/CustomButtons/Button';
 import { sleep, composeValidators, required, minLength } from '../helpers/validators';
 
 
-const onSubmit = async values => {
-    await sleep(500);
-    window.alert(JSON.stringify(values, undefined, 2));
-}
-
 const useStyles = makeStyles((theme) => ({
+    root: {
+        backgroundColor: '#ededed',
+        height: '100%',
+        paddingTop: '200px'
+    },
     widthCard: {
         width: '400px',
         margin: 'auto',
-        marginTop: '50px'
     },
     paddingTop: {
         paddingTop: '0.75rem'
@@ -90,14 +90,21 @@ function LoginPage(props) {
         showPassword: false,
     });
     const classes = useStyles();
+    const history = useHistory();
+    const { isLoggedIn } = props;
 
     useEffect(() => {
+        if (isLoggedIn) {
+            history.push('/');
+        }
+    }, [history, isLoggedIn])
+
+    const onSubmit = async values => {
+        await sleep(500);
         const { authActions } = props;
         const { loginRequest } = authActions;
-        loginRequest();
-    }, []);
-
-    console.log(valuesPass)
+        loginRequest({ user: values.username, password: values.password });
+    }
 
     const handleChange = (prop) => (event) => {
         setValues({ ...valuesPass, [prop]: event.target.value });
@@ -112,10 +119,11 @@ function LoginPage(props) {
     };
 
     return (
-        <Card className={classes.widthCard}>
-            <CardHeader color="info" className={classes.cardHeader}>
-                <h1>Login</h1>
-                {/* <div className={classes.socialLine}>
+        <div className={classes.root}>
+            <Card className={classes.widthCard}>
+                <CardHeader color="info" className={classes.cardHeader}>
+                    <h1>Login</h1>
+                    {/* <div className={classes.socialLine}>
                     <CustomButton
                         justIcon
                         target="_blank"
@@ -143,77 +151,81 @@ function LoginPage(props) {
                         <i className={"fa fa-google-plus-g"} />
                     </CustomButton>
                 </div> */}
-            </CardHeader>
-            {/* <p className={classes.divider}>Or Be Classical</p> */}
-            <CardBody>
-                <Form
-                    onSubmit={onSubmit}
-                    subscription={{ submitting: true, pristine: true }}
-                    render={({
-                        submitError,
-                        handleSubmit,
-                        form,
-                        submitting,
-                        pristine,
-                        values
-                    }) => (
-                        <form onSubmit={handleSubmit} className={classes.paddingTop}>
-                            <Input
-                                name="username"
-                                label="Username"
-                                placeholder="Your username or email"
-                                validate={composeValidators(required, minLength(6))}
-                                startAdornment={
-                                    <InputAdornment position="start">
-                                        <AccountCircle />
-                                    </InputAdornment>
-                                }
-                            />
-                            <Input
-                                name="password"
-                                label="Password"
-                                placeholder="Your password"
-                                validate={composeValidators(required, minLength(8))}
-                                type={valuesPass.showPassword ? 'text' : 'password'}
-                                value={valuesPass.password}
-                                onChange={handleChange('password')}
-                                endAdornment={
-                                    <InputAdornment position="end">
-                                        <IconButton
-                                            aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
-                                            onMouseDown={handleMouseDownPassword}
-                                        >
-                                            {valuesPass.showPassword ? <Visibility /> : <VisibilityOff />}
-                                        </IconButton>
-                                    </InputAdornment>
-                                }
-                            />
-                            <div style={{ marginLeft: '130px', marginTop: '0.75rem' }}>
-                                <CustomButton type="submit" color="info" outline={true} >Sign In</CustomButton>
-                            </div>
-                            {/* <FormSpy subscription={{ values: true }}>
+                </CardHeader>
+                {/* <p className={classes.divider}>Or Be Classical</p> */}
+                <CardBody>
+                    <Form
+                        onSubmit={onSubmit}
+                        subscription={{ submitting: true, pristine: true }}
+                        render={({
+                            submitError,
+                            handleSubmit,
+                            form,
+                            submitting,
+                            pristine,
+                            values
+                        }) => (
+                            <form onSubmit={handleSubmit} className={classes.paddingTop}>
+                                <Input
+                                    name="username"
+                                    label="Username"
+                                    placeholder="Your username or email"
+                                    validate={composeValidators(required, minLength(5))}
+                                    startAdornment={
+                                        <InputAdornment position="start">
+                                            <AccountCircle />
+                                        </InputAdornment>
+                                    }
+                                />
+                                <Input
+                                    name="password"
+                                    label="Password"
+                                    placeholder="Your password"
+                                    validate={composeValidators(required, minLength(5))}
+                                    type={valuesPass.showPassword ? 'text' : 'password'}
+                                    value={valuesPass.password}
+                                    onChange={handleChange('password')}
+                                    endAdornment={
+                                        <InputAdornment position="end">
+                                            <IconButton
+                                                aria-label="toggle password visibility"
+                                                onClick={handleClickShowPassword}
+                                                onMouseDown={handleMouseDownPassword}
+                                            >
+                                                {valuesPass.showPassword ? <Visibility /> : <VisibilityOff />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    }
+                                />
+                                <div style={{ marginLeft: '130px', marginTop: '0.75rem' }}>
+                                    <CustomButton type="submit" color="info" outline={true} >Sign In</CustomButton>
+                                </div>
+                                {/* <FormSpy subscription={{ values: true }}>
                                 {({ values }) => (
                                     <pre>
                                         {JSON.stringify(values, 0, 2)}
                                     </pre>
                                 )}
                             </FormSpy> */}
-                        </form>
-                    )}
-                />
-            </CardBody>
-        </Card>
+                            </form>
+                        )}
+                    />
+                </CardBody>
+            </Card>
+        </div>
     )
 }
 
 LoginPage.propTypes = {
     authActions: PropTypes.shape({
         loginRequest: PropTypes.func,
-    })
+    }),
+    isLoggedIn: PropTypes.bool,
 }
 
-const mapStateToProps = null;
+const mapStateToProps = ({ auth: { isLoggedIn } }) => ({
+    isLoggedIn
+});
 const mapDispatchToProps = dispatch => {
     return {
         authActions: bindActionCreators(authActions, dispatch),
