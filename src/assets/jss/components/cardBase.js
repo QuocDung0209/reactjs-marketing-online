@@ -151,6 +151,7 @@ export {
     whiteColor,
     blackColor,
     hexToRgb,
+    boxShadow,
     warningCardHeader,
     successCardHeader,
     dangerCardHeader,

@@ -1,7 +1,8 @@
 import * as authActionContants from '../../constants/auth';
 
 const initialState = {
-    isLoggedIn: !!localStorage.getItem('user') // Convert to boolean value
+    isLoggedIn: !!localStorage.getItem('token'), // Convert to boolean value
+    username: JSON.parse(localStorage.getItem('username')),
 };
 
 const reducer = (state = initialState, action) => {
@@ -10,7 +11,8 @@ const reducer = (state = initialState, action) => {
             return state;
         case authActionContants.LOGIN_SUCCESS:
             const { data } = action.payload;
-            localStorage.setItem('user', JSON.stringify(data.accessToken));
+            localStorage.setItem('token', JSON.stringify(data.accessToken));
+            localStorage.setItem('username', JSON.stringify(data.username));
             return {
                 ...state,
                 ...data,
@@ -20,7 +22,8 @@ const reducer = (state = initialState, action) => {
             // const { error } = action.payload;
             return state;
         case authActionContants.LOGOUT:
-            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            localStorage.removeItem('username');
             return {
                 ...state,
                 isLoggedIn: false

@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Field, FormSpy } from 'react-final-form';
+import { Form } from 'react-final-form'; // Contains Field, FormSpy
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { useHistory } from 'react-router-dom';
@@ -28,7 +28,8 @@ const useStyles = makeStyles((theme) => ({
     root: {
         backgroundColor: '#ededed',
         height: '100%',
-        paddingTop: '200px'
+        paddingTop: '15%',
+        overflow: 'auto',
     },
     widthCard: {
         width: '400px',

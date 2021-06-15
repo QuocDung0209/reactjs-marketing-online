@@ -1,11 +1,10 @@
 import React from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Map from "../container/GoogleMap";
 import Grid from "@material-ui/core/Grid";
 import InfoTable from "../components/InfoTable";
 import CustomButton from '../components/CustomButtons/Button';
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const useStyles = makeStyles({
   root: {
@@ -27,13 +26,9 @@ const useStyles = makeStyles({
   }
 });
 
-function Home({match}) {
+function Home({ match }) {
   const classes = useStyles();
-  const {name, age} = (match && match.location && match.location.state) ?? {name: '', age: ''};
-
-  // let query = useQuery();
-  // let name = query.get("name");
-  // let age = query.get("age");
+  const { name, age } = (match && match.location && match.location.state) ?? { name: '', age: '' };
 
   return (
     <div className={classes.root}>

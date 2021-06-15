@@ -38,5 +38,6 @@ export {
     minLength,
     mustBeNumber,
     minValue,
-    composeValidators
+    composeValidators,
+    usernameAvailable
 }
