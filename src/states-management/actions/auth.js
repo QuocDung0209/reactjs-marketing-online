@@ -1,5 +1,6 @@
 import * as authApiService from '../../web-apis/authApiService';
 import * as authActionContants from '../../constants/auth';
+import * as notificationActions from './notication';
 
 export const login = () => {
     return {
@@ -50,6 +51,7 @@ export const loginRequest = (payload) => {
             })
             .catch(error => {
                 dispatch(loginFailed(error));
+                dispatch(notificationActions.noticeError(error))
                 dispatch(hideLoading());
             });
     };
