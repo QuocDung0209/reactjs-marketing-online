@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import MenuBar from "./components/MenuBar";
 import { Provider } from 'react-redux';
 import configureStore from './states-management/redux/configureStore';
+import GlobalLoading from "./components/Loading/GlobalLoading";
 
 const store = configureStore();
 
@@ -16,6 +17,7 @@ const App = () => {
         <CssBaseline />
         <MenuBar />
         <Container />
+        <GlobalLoading />
       </Router>
     </Provider>
   );

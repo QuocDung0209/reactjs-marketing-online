@@ -25,6 +25,14 @@ export const loginFailed = error => {
     };
 }
 
+export const showLoading = () => ({
+    type: authActionContants.SHOW_LOADING
+})
+
+export const hideLoading = () => ({
+    type: authActionContants.HIDE_LOADING
+})
+
 /**
  * Step 1: loginRequest()
  * Step 2: Reset state
@@ -34,13 +42,15 @@ export const loginFailed = error => {
 export const loginRequest = (payload) => {
     return dispatch => {
         dispatch(login());
+        dispatch(showLoading());
         authApiService.login(payload)
             .then(response => {
                 dispatch(loginSuccess(response && response.data));
+                dispatch(hideLoading());
             })
             .catch(error => {
                 dispatch(loginFailed(error));
-
+                dispatch(hideLoading());
             });
     };
 };

@@ -4,6 +4,9 @@ export const LOGIN_FAILED = 'LOGIN_FAILED';
 
 export const LOGOUT = 'LOGOUT';
 
+export const SHOW_LOADING = 'SHOW_LOADING';
+export const HIDE_LOADING = 'HIDE_LOADING';
+
 
 // CRUD_GET_MANY_FAILURE,
 // CRUD_GET_MANY_SUCCESS,

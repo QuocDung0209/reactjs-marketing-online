@@ -15,19 +15,26 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 ...data,
                 isLoggedIn: true
-            }
+            };
         case authActionContants.LOGIN_FAILED:
-            const { error } = action.payload;
-            return {
-                ...state,
-                ...error
-            }
+            // const { error } = action.payload;
+            return state;
         case authActionContants.LOGOUT:
             localStorage.removeItem('user');
             return {
                 ...state,
                 isLoggedIn: false
-            }
+            };
+        case authActionContants.SHOW_LOADING:
+            return {
+                ...state,
+                loading: true
+            };
+        case authActionContants.HIDE_LOADING:
+            return {
+                ...state,
+                loading: false
+            };
         default:
             return state;
     }
