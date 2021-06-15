@@ -32,7 +32,7 @@ function Home({ match }) {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item lg={11} xs={11} className={classes.welcome}>
           <h1>Welcome{name && age ? `: ${name} (${age})` : ""}</h1>
           <div>

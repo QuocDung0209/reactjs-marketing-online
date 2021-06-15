@@ -17,6 +17,7 @@ import CustomButton from '../CustomButtons/Button';
 // @material-ui/icons
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Explore from "@material-ui/icons/Explore";
+import HomeIcon from '@material-ui/icons/Home';
 
 // core components
 
@@ -45,12 +46,12 @@ const LinkCustom = ({ label, to, exact, classLink, classItem, activeClassName })
 
 const headers = classes => [
     {
-        label: <><Explore className={classes.icons} /> Home</>,
+        label: <><HomeIcon className={classes.icons} /> Home</>,
         to: '/',
         exact: true
     },
     {
-        label: <><AccountCircle className={classes.icons} /> Profile</>,
+        label: <><Explore className={classes.icons} /> Profile</>,
         to: '/info',
         exact: false
     },
