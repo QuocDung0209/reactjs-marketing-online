@@ -1,16 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import PropTypes from 'prop-types';
 import { makeStyles } from "@material-ui/core/styles";
-import Map from "../container/GoogleMap";
 import Grid from "@material-ui/core/Grid";
-import InfoTable from "../components/InfoTable";
-import CustomButton from '../components/CustomButtons/Button';
 import Banner from '../components/Banners/Banner';
+import Product from '../components/Products/Product';
+import { connect } from 'react-redux';
 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-    paddingTop: '72px'
+    padding: '0 1rem',
+    paddingTop: '72px !important',
+    width: '99%',
   },
 
   welcome: {
@@ -26,30 +27,45 @@ const useStyles = makeStyles({
   }
 });
 
-function Home({ match }) {
+function Home(props) {
   const classes = useStyles();
-  const { name, age } = (match && match.location && match.location.state) ?? { name: '', age: '' };
+  const { productList } = props;
 
   return (
     <div className={classes.root}>
       <Grid container>
         <Grid item lg={12} xs={12} className={classes.welcome}>
           <Banner />
-          {/* <h1>Welcome{name && age ? `: ${name} (${age})` : ""}</h1>
-          <div>
-            <NavLink to="/info">Input infomation</NavLink>
-          </div>
-          <CustomButton color="google" outline={true} >Tetsss</CustomButton> */}
         </Grid>
-        {/* <Grid item lg={5} xs={11} className={classes.gridItem}>
-          <Map />
+        <Grid container spacing={2}>
+          {productList.map(product => (
+            <Grid item key={product.id}>
+              <Product {...product}></Product>
+            </Grid>
+          ))}
         </Grid>
-        <Grid item lg={5} xs={11} className={classes.gridItem}>
-          <InfoTable />
-        </Grid> */}
       </Grid>
     </div>
   );
 }
 
-export default Home;
+Home.propTypes = {
+  productList: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number,
+    imageUrl: PropTypes.string,
+    name: PropTypes.string,
+    author: PropTypes.string,
+    date: PropTypes.string,
+    rating: PropTypes.number,
+    comments: PropTypes.number,
+    summary: PropTypes.string,
+    prices: PropTypes.string,
+    sales: PropTypes.string,
+  }))
+}
+
+const mapStateToProps = ({ products: { productList } }) => ({
+  productList
+});
+
+export default connect(mapStateToProps)(Home);
