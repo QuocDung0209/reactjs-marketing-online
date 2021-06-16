@@ -110,8 +110,11 @@ const Product = (props) => {
                 </div>
             </CardBody>
             <CardFooter className={classes.footer}>
-                <Button color="success" outline={true} size="sm" round>
-                    Explore more
+                <Button style={{ marginRight: '0.75rem' }} color="success" outline={true} size="sm" round>
+                    Chi tiết
+                </Button>
+                <Button color="warning" outline={true} size="sm" round>
+                    Mua ngay
                 </Button>
             </CardFooter>
         </Card>
