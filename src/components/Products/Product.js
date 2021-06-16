@@ -90,7 +90,7 @@ const Product = (props) => {
                     justify="center"
                     alignItems="center">
                     <Grid item>
-                        <Rating name="read-only" size="small" value={rating} readOnly />
+                        <Rating name="read-only" size="small" value={rating} precision={0.25} readOnly />
                     </Grid>
                     <Grid>
                         <Badge badgeContent={comments} color="error">
