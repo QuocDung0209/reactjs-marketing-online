@@ -50,16 +50,16 @@ const headers = classes => [
         to: '/',
         exact: true
     },
-    {
-        label: <><Explore className={classes.icons} /> Profile</>,
-        to: '/info',
-        exact: false
-    },
-    {
-        label: <><Icon className={classes.icons}>settings</Icon> Detail</>,
-        to: '/detail',
-        exact: false
-    }
+    // {
+    //     label: <><Explore className={classes.icons} /> Profile</>,
+    //     to: '/info',
+    //     exact: false
+    // },
+    // {
+    //     label: <><Icon className={classes.icons}>settings</Icon> Detail</>,
+    //     to: '/detail',
+    //     exact: false
+    // }
 ]
 
 const useStyles = makeStyles(styles);

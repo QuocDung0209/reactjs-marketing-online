@@ -14,7 +14,11 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import Chip from '@material-ui/core/Chip';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
+    root: {
+        marginTop: '0.5rem !important',
+        marginBottom: '0 !important',
+    },
     footer: {
         position: 'relative',
         left: 0,
@@ -30,6 +34,10 @@ const useStyles = makeStyles((theme) => ({
         textAlign: 'center',
         fontWeight: 'bold',
         fontSize: '20px',
+        display: '-webkit-box',
+        WebkitLineClamp: 2,
+        WebkitBoxOrient: 'vertical',
+        overflow: 'hidden',
     },
     date: {
         textAlign: 'center',
@@ -45,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
     summary: {
         maxWidth: '250px',
         paddingTop: '0.75rem',
+        display: '-webkit-box',
+        WebkitLineClamp: 4,
+        WebkitBoxOrient: 'vertical',
+        overflow: 'hidden',
     }
 }))
 
@@ -64,7 +76,7 @@ const Product = (props) => {
     } = props;
 
     return (
-        <Card>
+        <Card className={classes.root}>
             <CardHeader className={classes.textCenter}>
                 <img src={imageUrl} alt={name} width={200} />
             </CardHeader>
