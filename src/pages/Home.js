@@ -5,6 +5,7 @@ import Map from "../container/GoogleMap";
 import Grid from "@material-ui/core/Grid";
 import InfoTable from "../components/InfoTable";
 import CustomButton from '../components/CustomButtons/Button';
+import Banner from '../components/Banners/Banner';
 
 const useStyles = makeStyles({
   root: {
@@ -13,7 +14,6 @@ const useStyles = makeStyles({
   },
 
   welcome: {
-    height: 120,
     backgroundColor: "white",
     margin: "auto"
   },
@@ -33,19 +33,20 @@ function Home({ match }) {
   return (
     <div className={classes.root}>
       <Grid container>
-        <Grid item lg={11} xs={11} className={classes.welcome}>
-          <h1>Welcome{name && age ? `: ${name} (${age})` : ""}</h1>
+        <Grid item lg={12} xs={12} className={classes.welcome}>
+          <Banner />
+          {/* <h1>Welcome{name && age ? `: ${name} (${age})` : ""}</h1>
           <div>
             <NavLink to="/info">Input infomation</NavLink>
           </div>
-          <CustomButton color="google" outline={true} >Tetsss</CustomButton>
+          <CustomButton color="google" outline={true} >Tetsss</CustomButton> */}
         </Grid>
-        <Grid item lg={5} xs={11} className={classes.gridItem}>
+        {/* <Grid item lg={5} xs={11} className={classes.gridItem}>
           <Map />
         </Grid>
         <Grid item lg={5} xs={11} className={classes.gridItem}>
           <InfoTable />
-        </Grid>
+        </Grid> */}
       </Grid>
     </div>
   );
