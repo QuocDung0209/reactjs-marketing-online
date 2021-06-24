@@ -1,5 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+// Components core
+import Sidebar from '../components/Sidebar/Sidebar';
+import CreateProduct from '../components/Products/CreateProduct';
+
+// @material-ui/icons
+import Dashboard from "@material-ui/icons/Dashboard";
+
+import { container } from '../assets/jss/base';
+
+import bgImage from '../assets/images/sidebar-2.jpg';
 
 const useStyles = makeStyles({
     root: {
@@ -7,15 +19,59 @@ const useStyles = makeStyles({
         padding: '0 1rem',
         paddingTop: '72px !important',
         width: '99%',
-    }
+        position: "relative",
+        top: "0",
+        height: "100vh"
+    },
+    content: {
+        width: "calc(100% - 260px)",
+        float: "right",
+    },
+    container,
 });
 
-const Admin = props => {
+const routes = [
+    {
+        path: "/create-product",
+        name: "Create Product",
+        icon: Dashboard,
+        component: CreateProduct,
+        layout: "/admin"
+    },
+];
+
+const switchRoutes = (
+    <Switch>
+        {routes.map((prop, key) => {
+            if (prop.layout === "/admin") {
+                return (
+                    <Route
+                        path={prop.layout + prop.path}
+                        component={prop.component}
+                        key={key}
+                    />
+                );
+            }
+            return null;
+        })}
+        <Redirect from="/admin" to="/admin/create-product" />
+    </Switch>
+);
+
+const Admin = ({ ...rest }) => {
+    // styles
     const classes = useStyles();
     return (
-        <>
-            <h1 className={classes.root}>Welcome to Admin page!</h1>
-        </>
+        <div className={classes.root}>
+            <Sidebar
+                routes={routes}
+                image={bgImage}
+                {...rest}
+            />
+            <div className={classes.content}>
+                <div className={classes.container}>{switchRoutes}</div>
+            </div>
+        </div>
     )
 }
 
