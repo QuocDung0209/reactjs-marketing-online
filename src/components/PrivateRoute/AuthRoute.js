@@ -1,18 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect, Route } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 const AuthRoute = props => {
+    const location = useLocation();
     const { isLoggedIn } = props;
-    console.log(isLoggedIn);
-    if (isLoggedIn) {
-        return <Redirect to='/home' />;
+    if (!isLoggedIn) {
+        return <Redirect to={{ pathname: '/login', state: { from: location } }} />;
     }
 
     return <Route {...props} />;
 }
 
-const mapStateToProps = ({ isLoggedIn }) => ({
+AuthRoute.propTypes = {
+    isLoggedIn: PropTypes.bool,
+}
+
+const mapStateToProps = ({ auth: { isLoggedIn } }) => ({
     isLoggedIn
 });
 

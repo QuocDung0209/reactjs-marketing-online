@@ -33,7 +33,7 @@ const useStyles = makeStyles(() => ({
         maxWidth: '250px',
         textAlign: 'center',
         fontWeight: 'bold',
-        fontSize: '20px',
+        fontSize: '16px',
         display: '-webkit-box',
         WebkitLineClamp: 2,
         WebkitBoxOrient: 'vertical',

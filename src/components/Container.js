@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Route, Switch } from "react-router-dom";
 import { routes } from "../routes";
 import { isMobile } from "react-device-detect";
+import AuthRoute from "./PrivateRoute/AuthRoute";
 
 const useStyles = makeStyles({
   paper: {
@@ -28,12 +29,18 @@ const Container = () => {
 
   if (routes.length > 0) {
     result = routes.map(route => (
-      <Route
-        exact={route.exact}
-        path={route.path}
-        component={route.main}
-        key={route.name}
-      />
+      route.isPrivate
+        ? <AuthRoute
+          exact={route.exact}
+          path={route.path}
+          component={route.main}
+          key={route.name} />
+        : <Route
+          exact={route.exact}
+          path={route.path}
+          component={route.main}
+          key={route.name}
+        />
     ));
   }
 

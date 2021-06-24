@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Info from "./pages/Info";
 import Detail from "./pages/Detail";
 import Login from './pages/Login';
+import Admin from './pages/Admin';
 
 const routes = [
   {
@@ -36,7 +37,14 @@ const routes = [
     name: 'Sign In',
     path: '/login',
     exact: false,
-    main: () => <Login />
+    main: (match) => <Login match={match} />
+  },
+  {
+    name: "Admin",
+    path: "/admin",
+    exact: false,
+    isPrivate: true,
+    main: () => <Admin />
   },
   {
     name: "Notfound",

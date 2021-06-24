@@ -97,11 +97,22 @@ function HeaderLinks(props) {
                 );
             })}
             {isLoggedIn ? (
-                <ListItem className={classes.listItem}>
-                    <CustomButton className={classes.navLink} color="transparent" onClick={logout}>
-                        <AccountCircle className={classes.icons} /> {`${title.charAt(0).toUpperCase()}${title.slice(1)}`}
-                    </CustomButton>
-                </ListItem>) : (
+                <>
+                    <ListItem className={classes.listItem}>
+                        <NavLink
+                            to="/admin"
+                            activeClassName={classes.navLinkActive}
+                            className={classes.navLink}
+                        >
+                            <Explore className={classes.icons} /> Admin
+                        </NavLink>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <CustomButton className={classes.navLink} color="transparent" onClick={logout}>
+                            <AccountCircle className={classes.icons} /> {`${title.charAt(0).toUpperCase()}${title.slice(1)}`}
+                        </CustomButton>
+                    </ListItem>
+                </>) : (
                 <ListItem className={classes.listItem}>
                     <NavLink
                         to={`/${title}`}
@@ -110,8 +121,9 @@ function HeaderLinks(props) {
                     >
                         <AccountCircle className={classes.icons} /> {`${title.charAt(0).toUpperCase()}${title.slice(1)}`}
                     </NavLink>
-                </ListItem>)}
-        </List>
+                </ListItem>)
+            }
+        </List >
     );
 }
 
