@@ -6,11 +6,15 @@ import Banner from '../components/Banners/Banner';
 import Product from '../components/Products/Product';
 import { connect } from 'react-redux';
 
+//Components core
+import Footer from '../components/Footer/Footer';
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     padding: '0 1rem',
     paddingTop: '72px !important',
+    paddingBottom: '20px !important',
     width: '99%',
   },
 
@@ -32,20 +36,23 @@ function Home(props) {
   const { productList } = props;
 
   return (
-    <div className={classes.root}>
-      <Grid container>
-        <Grid item lg={12} xs={12} className={classes.welcome}>
-          <Banner />
+    <>
+      <div className={classes.root}>
+        <Grid container>
+          <Grid item lg={12} xs={12} className={classes.welcome}>
+            <Banner />
+          </Grid>
+          <Grid container spacing={2}>
+            {productList.map(product => (
+              <Grid item key={product.id}>
+                <Product {...product}></Product>
+              </Grid>
+            ))}
+          </Grid>
         </Grid>
-        <Grid container spacing={2}>
-          {productList.map(product => (
-            <Grid item key={product.id}>
-              <Product {...product}></Product>
-            </Grid>
-          ))}
-        </Grid>
-      </Grid>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
 
