@@ -5,6 +5,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 // Components core
 import Sidebar from '../components/Sidebar/Sidebar';
 import CreateProduct from '../components/Products/CreateProduct';
+import AddProductDetail from '../components/Products/AddProductDetail';
 
 // @material-ui/icons
 import Dashboard from "@material-ui/icons/Dashboard";
@@ -36,6 +37,13 @@ const routes = [
         name: "Create Product",
         icon: Dashboard,
         component: CreateProduct,
+        layout: "/admin"
+    },
+    {
+        path: "/add-product-detail",
+        name: "Add Product Deatail",
+        icon: Dashboard,
+        component: AddProductDetail,
         layout: "/admin"
     },
 ];
