@@ -61,6 +61,7 @@ export default function Input(props) {
         startAdornment,
         endAdornment,
         type,
+        textarea,
         value,
         onChange,
         loading
@@ -83,22 +84,32 @@ export default function Input(props) {
                             tooltip: classes.tooltip,
                             arrow: classes.arrow
                         }}>
-                            <OutlinedInput
-                                type={type}
-                                value={value}
-                                onChange={onChange}
-                                placeholder={placeholder}
-                                startAdornment={startAdornment}
-                                endAdornment={endAdornment}
-                                classes={{
-                                    root: classes.root,
-                                }}
-                                error={meta.error && meta.touched}
-                                inputProps={{
-                                    className: meta.error && meta.touched ? classes.invalid : ''
-                                }}
-                                {...input}
-                            />
+                            {textarea
+                                ? <textarea
+                                    value={value}
+                                    onChange={onChange}
+                                    placeholder={placeholder}
+                                    rows={4}
+                                    cols={70}
+                                    className={classes.root + meta.error && meta.touched ? classes.invalid : ''}
+                                    {...input}
+                                />
+                                : <OutlinedInput
+                                    type={type}
+                                    value={value}
+                                    onChange={onChange}
+                                    placeholder={placeholder}
+                                    startAdornment={startAdornment}
+                                    endAdornment={endAdornment}
+                                    classes={{
+                                        root: classes.root,
+                                    }}
+                                    error={meta.error && meta.touched}
+                                    inputProps={{
+                                        className: meta.error && meta.touched ? classes.invalid : ''
+                                    }}
+                                    {...input}
+                                />}
                         </Tooltip>
                         {loading && meta.validating && <span><Loading /></span>}
                     </Grid>
@@ -111,6 +122,7 @@ export default function Input(props) {
 Input.defaultProp = {
     name: 'textInput',
     type: 'text',
+    textarea: false,
     value: '',
     loading: false
 }
@@ -119,6 +131,7 @@ Input.propTypes = {
     name: PropTypes.string,
     label: PropTypes.string,
     type: PropTypes.string,
+    textarea: PropTypes.bool,
     value: PropTypes.string,
     onChange: PropTypes.func,
     placeholder: PropTypes.string,
