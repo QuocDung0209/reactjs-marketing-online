@@ -99,7 +99,11 @@ const sidebarStyle = theme => ({
     display: "block",
     padding: "10px 15px",
     backgroundColor: "transparent",
-    ...defaultFont
+    ...defaultFont,
+    "&:hover": {
+      color: "inherit",
+      background: "rgba(255, 255, 255, 0.1)"
+    },
   },
   itemIcon: {
     width: "24px",
@@ -130,7 +134,9 @@ const sidebarStyle = theme => ({
   },
   navLinkActive: {
     color: "inherit",
-    backgroundColor: "rgba(255, 255, 255, 0.1)"
+    background: "rgba(255, 255, 255, 0.1)",
+    margin: "10px 15px 0",
+    borderRadius: "3px",
   },
 });
 
